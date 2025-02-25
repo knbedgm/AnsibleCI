@@ -1,0 +1,22 @@
+---
+name: TEST
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - ".github/workflows/test.yml"
+
+jobs:
+    ansible-ping:
+        runs-on: minidell
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v3
+
+            - name: Install Ansible
+              run: echo "First Run!"
+
+        #   - name: Execute Ping Playbook
+        #     run: ansible-playbook ansible/ping.yml -i ansible/inventory.ini
