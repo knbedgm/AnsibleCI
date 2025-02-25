@@ -1,5 +1,5 @@
 ---
-name: Echo Test
+name: Run Ansible Playbooks
 
 on:
     push:
@@ -11,7 +11,7 @@ on:
     workflow_dispatch:
 
 jobs:
-    Echo:
+    Ping-Playbook:
         runs-on: minidell
         steps:
             - name: Checkout Repository
@@ -32,4 +32,7 @@ jobs:
                   ansible-galaxy install -r ansible/requirements.yaml
 
             - name: Execute Ping Playbook
-              run: ansible-playbook ansible/playbooks/ping.yml -i ansible/inventory/inventory.ini
+              run: |
+                  pwd
+                  ls -R 
+                  ansible-playbook ansible/playbooks/ping.yaml -i ansible/inventory/inventory.yaml
