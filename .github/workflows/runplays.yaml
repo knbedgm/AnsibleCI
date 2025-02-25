@@ -1,0 +1,35 @@
+---
+name: Echo Test
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - ".github/workflows/runplays.yaml"
+            - "ansible/**"
+    workflow_dispatch:
+
+jobs:
+    Echo:
+        runs-on: minidell
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v3
+
+            - name: Create virtualenv
+              run: |
+                  python3 -m venv ./.venv
+                  . .venv/bin/activate
+                  echo PATH=$PATH >> $GITHUB_ENV
+
+            - name: Install Ansible
+              run: |
+                  pip install Ansible
+
+            - name: Install Ansible Collections
+              run: |
+                  ansible-galaxy install -r ansible/requirements.yaml
+
+            - name: Execute Ping Playbook
+              run: ansible-playbook ansible/playbooks/ping.yml -i ansible/inventory/inventory.ini
