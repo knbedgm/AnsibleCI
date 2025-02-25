@@ -1,22 +1,22 @@
 ---
-name: TEST
+name: Echo Test
 
 on:
     push:
         branches:
             - main
         paths:
-            - ".github/workflows/test.yml"
+            - ".github/workflows/test.yaml"
     workflow_dispatch:
 
 jobs:
-    ansible-ping:
+    Echo:
         runs-on: minidell
         steps:
             - name: Checkout Repository
               uses: actions/checkout@v3
 
-            - name: Install Ansible
+            - name: Echo
               run: echo "First Run!"
 
         #   - name: Execute Ping Playbook
