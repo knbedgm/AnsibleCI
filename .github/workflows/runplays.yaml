@@ -8,6 +8,7 @@ on:
         paths:
             - ".github/workflows/runplays.yaml"
             - "ansible/**"
+            - "!**/facts/**"
     workflow_dispatch:
 
 jobs:
@@ -26,13 +27,11 @@ jobs:
             - name: Install Ansible
               run: |
                   pip install Ansible
+                  pip install -r requirements.txt
 
             - name: Install Ansible Collections
               run: |
                   ansible-galaxy install -r ansible/requirements.yaml
 
             - name: Execute Ping Playbook
-              run: |
-                  pwd
-                  ls -R 
-                  ansible-playbook ansible/playbooks/ping.yaml -i ansible/inventory/inventory.yaml
+              run: ansible-playbook ansible/playbooks/configure-junipers/configure-junipers.yaml -i ansible/inventory

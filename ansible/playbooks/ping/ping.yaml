@@ -7,7 +7,7 @@
     - name: Ping
       ansible.netcommon.net_ping:
       register: ping_result
-  
+
     - name: Output Message
       ansible.builtin.debug:
         msg: "Ping Succesfull!"

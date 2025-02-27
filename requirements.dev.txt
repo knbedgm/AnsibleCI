@@ -1,3 +1,4 @@
+-r requriements.txt
 ansible-builder==3.1.0
 ansible-compat==25.1.4
 ansible-core==2.18.3

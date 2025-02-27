@@ -1,0 +1,37 @@
+---
+- name: Fetch Configs
+  hosts: all
+  # connection: juniper.device.pyez
+  connection: local
+  gather_facts: false
+
+  vars:
+    user: "{{ ansible_user }}"
+    passwd: "{{ ansible_password }}"
+
+  tasks:
+    - name: Retrieve device facts and save to file
+      juniper.device.facts:
+        # config_format: xml
+        savedir: "{{ playbook_dir }}/facts"
+    - name: "Update config (leaf)"
+      when: '"leaf" in group_names'
+      juniper.device.config:
+        template: "{{ playbook_dir }}/leaf_config.jinja2"
+        load: replace
+        format: text
+        vars:
+          hostname: "{{ inventory_hostname }}"
+    - name: "Update config (spine)"
+      when: '"spine" in group_names'
+      juniper.device.config:
+        template: "{{ playbook_dir }}/spine_config.jinja2"
+        load: replace
+        format: text
+        vars:
+          hostname: "{{ inventory_hostname }}"
+    - name: "Get committed configuration"
+      juniper.device.config:
+        retrieve: "committed"
+        # format: "xml"
+        dest_dir: "{{ playbook_dir }}/facts"

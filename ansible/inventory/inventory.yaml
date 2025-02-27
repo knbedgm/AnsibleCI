@@ -1,5 +1,26 @@
 all:
-    hosts:
-        junip1:
-            ansible_host: 192.168.122.5
-            ansible_network_os: ansible.netcommon.cli_config
+  hosts:
+    junip1:
+      ansible_host: 192.168.122.11
+      ansible_network_os: junipernetworks.junos.junos
+      ansible_user: root
+      ansible_password: Passwd
+    junip2:
+      ansible_host: 192.168.122.12
+      ansible_network_os: junipernetworks.junos.junos
+      ansible_user: root
+      ansible_password: Passwd
+    junip3:
+      ansible_host: 192.168.122.13
+      ansible_network_os: junipernetworks.junos.junos
+      ansible_user: root
+      ansible_password: Passwd
+
+leaf:
+  hosts:
+    junip2:
+    junip3:
+
+spine:
+  hosts:
+    junip1:
