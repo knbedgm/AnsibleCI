@@ -1,3 +1,60 @@
 system {
-    host-name {{ hostname }}-new;
+    host-name {{ hostname }};
+}
+
+interfaces {
+    lo0 {
+        unit 0 {
+            family inet {
+                address {{ loopback }}/32;
+            }
+        }
+    }
+
+    em0 {
+        unit 0 {
+            description "management";
+            family inet {
+                address {{ management_ip }}/24;
+            }
+        }
+    }
+
+    em1 {
+        unit 0 {
+            description "spine p2p";
+            family inet {
+                address {{ spine_ip }}/30;
+            }
+        }
+    }
+
+    em2 {
+        unit 0 {
+            description "network";
+            family inet {
+                address {{ network_ip }}/24;
+            }
+        }
+    }
+}
+
+routing-options {
+    router-id {{ loopback }}
+}
+
+protocols {
+    ospf {
+        area 0 {
+            interface lo0 {
+                passive;
+            }
+            interface em1 {
+                interface-type p2p;
+            }
+            interface em2 {
+                passive;
+            }
+        }
+    }
 }

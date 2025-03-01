@@ -5,16 +5,26 @@ all:
       ansible_network_os: junipernetworks.junos.junos
       ansible_user: root
       ansible_password: Passwd
+      meta:
+        loopback: 172.16.0.1
     junip2:
       ansible_host: 192.168.122.12
       ansible_network_os: junipernetworks.junos.junos
       ansible_user: root
       ansible_password: Passwd
+      meta:
+        loopback: 172.16.0.2
+        spine_ip: 10.0.12.2
+        network_ip: 192.168.1.1
     junip3:
       ansible_host: 192.168.122.13
       ansible_network_os: junipernetworks.junos.junos
       ansible_user: root
       ansible_password: Passwd
+      meta:
+        loopback: 172.16.0.3
+        spine_ip: 10.0.13.2
+        network_ip: 192.168.2.1
 
 leaf:
   hosts:

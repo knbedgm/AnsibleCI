@@ -22,6 +22,10 @@
         format: text
         vars:
           hostname: "{{ inventory_hostname }}"
+          management_ip: "{{ ansible_host }}"
+          loopback: "{{ meta.loopback }}"
+          spine_ip: "{{ meta.spine_ip }}"
+          network_ip: "{{ meta.network_ip }}"
     - name: "Update config (spine)"
       when: '"spine" in group_names'
       juniper.device.config:
@@ -30,6 +34,8 @@
         format: text
         vars:
           hostname: "{{ inventory_hostname }}"
+          management_ip: "{{ ansible_host }}"
+          loopback: "{{ meta.loopback }}"
     - name: "Get committed configuration"
       juniper.device.config:
         retrieve: "committed"
