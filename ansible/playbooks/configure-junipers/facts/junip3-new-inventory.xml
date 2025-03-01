@@ -1,0 +1,4 @@
+<error>
+  <source-daemon>chassis-control</source-daemon>
+  <message>Unrecognized command (chassis-control)</message>
+</error>
